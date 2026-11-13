@@ -1,0 +1,7 @@
+numpy
+pillow
+pandas
+matplotlib
+opencv-python   # chỉ dùng để so sánh, không dùng trong thuật toán
+streamlit       # giao diện
+tabulate

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+# du lieu goc, file tai ve lon
+archive/
+bbbc004_raw/
+*.zip
+data/_bo/
+data_tools/out/*.png
+_tmp_upload/
