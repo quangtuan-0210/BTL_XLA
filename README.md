@@ -13,7 +13,8 @@ OpenCV chỉ dùng để so sánh (`baseline_opencv/`).
 |---|---|---|
 | `src/preprocess.py`, `segment.py`, `morphology.py`, `separate.py`, `pipeline.py` | Thuật toán tiền xử lý → tách vật dính | TV1 |
 | `src/count.py`, `measure.py`, `evaluate.py` *(chưa có)* | Đếm, đo, đánh giá chính thức | TV2 |
-| `app.py`, `src/denomination.py` *(chưa có)* | Giao diện Streamlit, mệnh giá | TV3 |
+| `app.py` | Giao diện Streamlit (chọn ảnh, chỉnh tham số, xem từng bước, bảng thông tin vật) | TV3 |
+| `src/denomination.py` *(chưa có)* | Đoán mệnh giá, tính tổng tiền | TV3 |
 | `data/` | 90 ảnh xu + `labels.csv`; 40 ảnh tế bào BBBC004 – xem `data/README_data.md` | TV3 |
 | `data_tools/` | Script tạo bộ dữ liệu + bảng/biểu đồ phân tích dữ liệu | TV3 |
 | `baseline_opencv/` | So sánh từng bước với OpenCV | TV1 |
@@ -25,6 +26,11 @@ pip install -r requirements.txt
 python src/run_tv1_eval.py chinh        # đếm thử trên tập chỉnh (18 ảnh)
 python baseline_opencv/compare_tv1.py   # so sánh với OpenCV
 ```
+Giao diện:
+```bash
+streamlit run app.py      # trình duyệt tự mở http://localhost:8501
+```
+Dùng trong code:
 ```python
 from src.pipeline import run
 kq = run(anh_rgb)   # kq["count"] = số vật; kq["binary"], kq["separated"], kq["labels"]: ảnh từng bước
