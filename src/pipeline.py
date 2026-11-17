@@ -1,31 +1,22 @@
-"""Ghép toàn bộ pipeline TV1 (và một bản đếm tạm, chờ TV2 thay bằng count.py chính thức).
+"""Ghép toàn bộ pipeline: phần TV1 (tiền xử lý -> tách vật dính) + phần TV2 (đếm, đo).
 
-    ảnh màu -> preprocess -> segment (Otsu) -> clean (hình thái học) -> separate (watershed) -> đếm
+    ảnh màu -> preprocess -> segment (Otsu) -> clean (hình thái học) -> separate (watershed)
+            -> count_objects (gán nhãn BFS, lọc nhiễu, đo từng vật)
 """
-import numpy as np
 from .preprocess import preprocess
 from .segment import segment, color_difference, segment_color
 from .preprocess import resize_max, gaussian_blur
 from .morphology import clean
-from .separate import separate, label_bfs
+from .separate import separate
+from .count import count_objects
 
 DEFAULT = dict(max_side=512, blur_size=5, sigma=1.0, median_size=0,
                open_r=2, close_r=3, peak_ratio=0.4, min_ratio=0.2, min_area_ratio=0.05, mode="color")
 
 
-def count_tmp(binary, min_area_ratio=0.05, mode="color"):
-    """Đếm tạm: gán nhãn, bỏ vùng có diện tích < min_area_ratio * vùng lớn nhất (vụn nhiễu)."""
-    lab, n = label_bfs(binary)
-    if n == 0:
-        return 0, lab
-    areas = np.bincount(lab.ravel())[1:]
-    keep = np.nonzero(areas >= min_area_ratio * areas.max())[0] + 1
-    lab2 = np.where(np.isin(lab, keep), lab, 0)
-    return len(keep), lab2
-
-
 def run(img_rgb, use_separate=True, **kw):
-    """Chạy cả pipeline. Trả về dict chứa ảnh từng bước + số lượng."""
+    """Chạy cả pipeline. Trả về dict chứa ảnh từng bước, số lượng (count),
+    ảnh nhãn (labels, kích thước ảnh đã thu nhỏ) và thông số từng vật (objects, đổi về ảnh gốc)."""
     p = {**DEFAULT, **kw}
     gray, scale = preprocess(img_rgb, p["max_side"], p["blur_size"], p["sigma"], p["median_size"])
     if p["mode"] == "color":   # tách theo độ khác màu nền
@@ -39,6 +30,7 @@ def run(img_rgb, use_separate=True, **kw):
         sep, lab_ws, dist = separate(cleaned, p["peak_ratio"], p["min_ratio"], return_labels=True)
     else:
         sep, dist = cleaned, None
-    n, labels = count_tmp(sep, p["min_area_ratio"])
+    n, objects, labels = count_objects(sep, min_area_ratio=p["min_area_ratio"], scale=scale,
+                                       return_labels=True)
     return dict(gray=gray, threshold=t, binary=binary, cleaned=cleaned, dist=dist,
-                separated=sep, labels=labels, count=n, scale=scale)
+                separated=sep, labels=labels, count=n, objects=objects, scale=scale)

@@ -10,55 +10,18 @@ import time
 import numpy as np
 import pandas as pd
 import streamlit as st
-from PIL import Image, ImageDraw
+from PIL import Image
 
 from src.pipeline import DEFAULT, run
 from src.preprocess import resize_max
+from src.measure import objects_table, suspicious      # TV2: bảng thông số từng vật
+from src.visualize import draw_objects                  # TV2: vẽ kết quả
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 st.set_page_config(page_title="Đếm đối tượng trong ảnh", layout="wide")
 
 
 # ---------------- tiện ích hiển thị ----------------
-def object_table(labels, scale):
-    """Thông tin từng vật: diện tích, tâm, khung bao, đường kính tương đương (đổi về pixel ảnh gốc)."""
-    rows = []
-    for i in range(1, labels.max() + 1):
-        ys, xs = np.nonzero(labels == i)
-        if len(ys) == 0:
-            continue
-        area = len(ys) / scale ** 2
-        rows.append(dict(vat=len(rows) + 1, tam_x=int(xs.mean() / scale), tam_y=int(ys.mean() / scale),
-                         dien_tich_px=int(area), duong_kinh_px=round(2 * np.sqrt(area / np.pi), 1),
-                         rong_px=int((xs.max() - xs.min() + 1) / scale), cao_px=int((ys.max() - ys.min() + 1) / scale)))
-    return pd.DataFrame(rows).rename(columns={
-        "vat": "Vật", "tam_x": "Tâm x", "tam_y": "Tâm y", "dien_tich_px": "Diện tích (px²)",
-        "duong_kinh_px": "Đường kính (px)", "rong_px": "Rộng (px)", "cao_px": "Cao (px)"})
-
-
-def overlay(img_small, labels):
-    """Tô màu nhẹ từng vật, vẽ viền và số thứ tự lên ảnh."""
-    rng = np.random.default_rng(7)
-    pal = rng.integers(40, 255, (labels.max() + 1, 3))
-    base = img_small.astype(np.float64)
-    m = labels > 0
-    base[m] = 0.55 * base[m] + 0.45 * pal[labels[m]]
-    edge = np.zeros_like(m)
-    edge[:, 1:] |= labels[:, 1:] != labels[:, :-1]
-    edge[1:, :] |= labels[1:, :] != labels[:-1, :]
-    base[edge & (m | np.roll(m, 1, 0) | np.roll(m, 1, 1))] = (255, 40, 40)
-    im = Image.fromarray(np.clip(base, 0, 255).astype(np.uint8))
-    dr = ImageDraw.Draw(im)
-    k = 0
-    for i in range(1, labels.max() + 1):
-        ys, xs = np.nonzero(labels == i)
-        if len(ys) == 0:
-            continue
-        k += 1
-        cx, cy = xs.mean(), ys.mean()
-        dr.ellipse([cx - 11, cy - 11, cx + 11, cy + 11], fill=(255, 255, 255), outline=(20, 20, 20))
-        dr.text((cx, cy), str(k), fill=(0, 0, 0), anchor="mm")
-    return im
 
 
 def to_uint8(a):
@@ -135,8 +98,10 @@ if truth is not None:
 
 left, right = st.columns(2)
 left.image(res["small"], caption="Ảnh gốc", width="stretch")
-ov = overlay(res["small"], res["labels"])
-right.image(ov, caption=f"Kết quả: {n} vật", width="stretch")
+nghi = suspicious(res["objects"])
+ov = draw_objects(res["small"], res["labels"], suspicious_ids=nghi)
+right.image(ov, caption=f"Kết quả: {n} vật" + (f" (số đỏ = nghi gộp nhiều vật: {nghi})" if nghi else ""),
+            width="stretch")
 buf = io.BytesIO(); ov.save(buf, format="PNG")
 right.download_button("Tải ảnh kết quả", buf.getvalue(), "ket_qua.png", "image/png")
 
@@ -151,6 +116,6 @@ for col, (name, im) in zip(cols, steps):
     col.image(to_uint8(im), caption=name, width="stretch", clamp=True)
 
 st.subheader("Thông tin từng vật")
-tbl = object_table(res["labels"], res["scale"])
+tbl = objects_table(res["objects"])
 st.dataframe(tbl, hide_index=True, width="stretch")
 st.download_button("Tải bảng (CSV)", tbl.to_csv(index=False).encode("utf-8-sig"), "thong_tin_vat.csv", "text/csv")
