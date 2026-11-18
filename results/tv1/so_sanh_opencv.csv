@@ -1,10 +1,10 @@
 buoc,ham_opencv,ti_le_giong_pct,ms_tu_viet,ms_opencv,cham_hon_x_lan
-1. Xám hóa,cvtColor,100.0,0.93,0.471,2
-2. Lọc Gauss 5x5,GaussianBlur,100.0,6.07,0.449,14
-3. Ngưỡng Otsu,threshold(OTSU),100.0,0.53,0.151,4
-4a. Co,erode,100.0,0.44,0.13,3
-4b. Giãn,dilate,100.0,0.4,0.141,3
-4c. Đóng,morphologyEx(CLOSE),100.0,0.78,0.191,4
-5. Biến đổi khoảng cách,distanceTransform(L2),83.1,9.08,0.737,12
-6. Watershed (cùng hạt giống),watershed,100.0,262.76,4.112,64
-(phụ) Gán nhãn BFS,connectedComponents,100.0,13.04,0.418,31
+1. Xám hóa,cvtColor,100.0,0.79,0.511,2
+2. Lọc Gauss 5x5,GaussianBlur,100.0,5.8,0.403,14
+3. Ngưỡng Otsu,threshold(OTSU),100.0,0.5,0.142,3
+4a. Co,erode,100.0,0.42,0.13,3
+4b. Giãn,dilate,100.0,0.37,0.107,3
+4c. Đóng,morphologyEx(CLOSE),100.0,0.74,0.169,4
+5. Biến đổi khoảng cách,distanceTransform(L2),80.3,12.37,0.661,19
+6. Watershed (cùng hạt giống),watershed,100.0,261.92,4.043,65
+(phụ) Gán nhãn BFS,connectedComponents,100.0,11.85,0.325,36

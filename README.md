@@ -18,13 +18,13 @@ OpenCV chỉ dùng để so sánh (`baseline_opencv/`).
 | `data/` | 90 ảnh xu + `labels.csv`; 40 ảnh tế bào BBBC004 – xem `data/README_data.md` | TV3 |
 | `data_tools/` | Script tạo bộ dữ liệu + bảng/biểu đồ phân tích dữ liệu | TV3 |
 | `baseline_opencv/` | So sánh từng bước với OpenCV (`compare_tv1.py`, `compare_tv2.py`) + pipeline OpenCV đầy đủ (`pipeline_opencv.py`) | TV1, TV2 |
-| `tests/` | Kiểm thử trên ảnh tổng hợp nhỏ: `test_tv1.py` (18 bài), `test_tv2.py` (27 bài) | TV1, TV2 |
+| `tests/` | Kiểm thử trên ảnh tổng hợp nhỏ: `test_tv1.py` (19 bài), `test_tv2.py` (27 bài) | TV1, TV2 |
 | `results/tv1/`, `results/tv2/` | Bảng kết quả, biểu đồ, hình minh họa, phân tích thất bại | TV1, TV2 |
 
 ## Kết quả chính (tập kiểm tra, 72 ảnh – chạy 1 lần)
 | Pipeline | Đếm đúng | MAE | Thời gian / ảnh |
 |---|---|---|---|
-| **Tự viết (chính)** | **52,8%** (Dễ 83% · Vừa 50% · Khó 25%) | **2,07** | 326 ms |
+| **Tự viết (chính)** | **51,4%** (Dễ 83% · Vừa 42% · Khó 29%) | **2,12** | 325 ms |
 | Tự viết, bỏ watershed | 27,8% | 3,44 | 75 ms |
 | OpenCV, cùng thiết kế | 59,7% | 2,00 | 9 ms |
 

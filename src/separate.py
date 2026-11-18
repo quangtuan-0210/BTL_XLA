@@ -1,12 +1,14 @@
 """TV1 - Bước 6-7: Tách các vật dính nhau (tự cài đặt).
 
 Bước 6 - Biến đổi khoảng cách (distance transform):
-    Với mỗi điểm thuộc vật, tính khoảng cách tới điểm nền gần nhất.
+    Với mỗi điểm thuộc vật, tính khoảng cách tới nền.
     Tâm đồng xu xa nền nhất -> giá trị lớn nhất. Hai xu dính nhau giống 2 "ngọn đồi"
     nối nhau bằng một "yên ngựa" thấp ở chỗ tiếp xúc.
-    Cài đặt: thuật toán Chamfer 3-4 (Borgefors, 1986), quét ảnh 2 lượt:
-    lượt xuôi (trên->dưới, trái->phải) và lượt ngược. Bước ngang/dọc tốn 3, bước chéo tốn 4
-    (xấp xỉ 3*căn 2). Kết quả chia 3 -> khoảng cách tính bằng pixel.
+    Cài đặt bằng PHÉP CO LẶP (Chương 5): co ảnh liên tục, mỗi lần co lớp ngoài cùng biến mất.
+    Khoảng cách của một điểm = số lần co mà điểm đó còn sống.
+    Phần tử cấu trúc 3x3 dùng XEN KẼ hình chữ thập (+) và hình vuông: vật teo lại thành
+    hình bát giác, gần hình tròn nhất -> "ngọn đồi" tròn, mỗi xu chỉ có một đỉnh.
+    (Chỉ dùng hình vuông -> vật teo thành hình vuông; chỉ dùng chữ thập -> hình thoi.)
 
 Bước 7 - Watershed (phân thủy) có hạt giống:
     a) Hạt giống = các ĐỈNH đồi (cực đại cục bộ của distance transform), mỗi đỉnh = 1 vật.
@@ -18,36 +20,26 @@ import heapq
 from collections import deque
 import numpy as np
 
-from .morphology import dilate, disk
+from .morphology import dilate, disk, erode
 
 
 # ---------------- Bước 6: distance transform ----------------
-def _pass_rows(d, a, b):
-    """Một lượt quét từ trên xuống: lấy giá trị từ hàng trên (+a dọc, +b chéo),
-    rồi lan từ trái sang phải trong cùng hàng (+a ngang)."""
-    h, w = d.shape
-    x = np.arange(w) * a
-    for y in range(h):
-        if y > 0:
-            up = d[y - 1]
-            cand = up + a
-            cand[1:] = np.minimum(cand[1:], up[:-1] + b)     # chéo trên-trái
-            cand[:-1] = np.minimum(cand[:-1], up[1:] + b)    # chéo trên-phải
-            d[y] = np.minimum(d[y], cand)
-        # lan ngang trái->phải: d[x] = min_j<=x (d[j] + a*(x-j))
-        d[y] = np.minimum.accumulate(d[y] - x) + x
-    return d
+SE_CHU_THAP = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], np.uint8)
+SE_VUONG = np.ones((3, 3), np.uint8)
 
 
 def distance_transform(binary):
-    """Khoảng cách (pixel, xấp xỉ Euclid) từ mỗi điểm vật tới điểm nền gần nhất. Nền = 0.
+    """Khoảng cách (pixel) từ mỗi điểm vật tới nền = số lần co ảnh mà điểm đó còn sống.
+    Lần co thứ 1, 3, 5... dùng chữ thập; lần 2, 4, 6... dùng hình vuông. Nền = 0.
     Ngoài ảnh coi là nền."""
-    b = np.pad(binary.astype(bool), 1, constant_values=False)
-    INF = 1e9
-    d = np.where(b, INF, 0.0)
-    d = _pass_rows(d, 3.0, 4.0)                       # lượt xuôi
-    d = _pass_rows(d[::-1, ::-1].copy(), 3.0, 4.0)[::-1, ::-1]   # lượt ngược (lật ảnh rồi quét lại)
-    return d[1:-1, 1:-1] / 3.0
+    cur = binary.astype(bool)
+    d = np.zeros(cur.shape, dtype=np.float64)
+    k = 0
+    while cur.any():
+        d += cur                      # điểm còn sống sau k lần co -> khoảng cách tăng 1
+        k += 1
+        cur = erode(cur, SE_CHU_THAP if k % 2 == 1 else SE_VUONG)
+    return d
 
 
 # ---------------- tiện ích ----------------

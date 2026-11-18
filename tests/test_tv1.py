@@ -65,6 +65,9 @@ sq = np.zeros((41, 41), np.uint8); sq[10:31, 10:31] = 1
 d = distance_transform(sq)
 check(f"tâm vuông 21x21 cách nền 11 px (được {d[20, 20]:.2f})", abs(d[20, 20] - 11) < 0.5)
 check("nền có khoảng cách = 0", np.all(d[sq == 0] == 0))
+y, x = np.mgrid[:61, :61]; tron = ((x - 30) ** 2 + (y - 30) ** 2 <= 20 ** 2).astype(np.uint8)
+dt = distance_transform(tron)
+check(f"đường tròn bán kính 20: tâm cách nền ~20 px (được {dt[30, 30]:.0f})", abs(dt[30, 30] - 20) <= 2)
 
 print("Bước 7 - Gán nhãn + watershed")
 diag = np.zeros((5, 5), np.uint8); diag[1, 1] = diag[2, 2] = 1
