@@ -52,7 +52,7 @@ kq["tong"]["ti_le_dung"], kq["tong"]["mae"], kq["theo_muc"]["kho"]
 |---|---|---|
 | `tu_viet` | (pipeline chính: độ khác màu nền + watershed) | – |
 | `tu_viet_khong_tach` | bỏ watershed | Bước tách vật dính đóng góp bao nhiêu? |
-| `tu_viet_xam` | Otsu trên ảnh xám thay vì độ khác màu nền | Cải tiến tách nền của TV1 có giúp không? |
+| `tu_viet_xam` | Otsu trên ảnh xám thay vì độ khác màu nền (chỉ để so sánh, ứng dụng không dùng) | Cải tiến tách nền của TV1 có giúp không? |
 | `opencv` | các bước dùng hàm OpenCV | Cài đặt tự viết có kém thư viện không? |
 
 ## Kết quả định lượng – tập kiểm tra (72 ảnh)

@@ -38,8 +38,10 @@ kq = run(anh_rgb)          # kq["count"], kq["binary"], kq["separated"], kq["lab
 | Khó | 0% → 33% | 4,83 → 1,33 |
 | **Tổng** | **22% → 78%** | **2,83 → 0,44** |
 
-Ảnh tế bào BBBC004 (đáp án 300/ảnh): IoU bước tách nền ≈ 0,88.
-Đếm: rời nhau 276 → **301**; dính 45%: 185 → **255**.
+Ảnh tế bào BBBC004 (đáp án 300/ảnh), cùng cách tách nền độ khác màu nền như ứng dụng: IoU bước tách nền ≈ 0,88.
+Đếm: rời nhau 278 → **302**; dính 45%: 187 → **255**.
+
+Ứng dụng chỉ có **một** cách tách nền (độ khác màu nền). Hàm `segment` (Otsu ảnh xám) chỉ còn dùng cho thí nghiệm so sánh của TV2.
 
 So sánh với OpenCV: các bước xám hóa, Gauss, Otsu, co, giãn, đóng, watershed giống **100%**; biến đổi khoảng cách
 giống ~80% (co lặp cho khoảng cách "bát giác", OpenCV tính khoảng cách Euclid); chậm hơn OpenCV 2–65 lần (OpenCV viết bằng C++).
