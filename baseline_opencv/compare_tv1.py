@@ -3,10 +3,10 @@ Chạy trên 18 ảnh tập chỉnh. Kết quả: results/tv1/so_sanh_opencv.csv
 import os, sys, time, numpy as np, pandas as pd, cv2
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.preprocess import to_gray, resize_max, gaussian_blur
-from src.segment import otsu_threshold
-from src.morphology import erode, dilate, closing, disk
-from src.separate import distance_transform, find_markers, watershed, label_bfs
+from src.preprocess_b1_3 import to_gray, resize_max, gaussian_blur
+from src.segment_b2_4 import otsu_threshold
+from src.morphology_b5 import erode, dilate, closing, disk
+from src.separate_b6_7 import distance_transform, find_markers, watershed, label_bfs
 
 def timed(f, *a, rep=3):
     t = time.perf_counter()

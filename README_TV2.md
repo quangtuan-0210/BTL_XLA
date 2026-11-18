@@ -6,8 +6,8 @@ OpenCV chỉ dùng trong `baseline_opencv/` để **so sánh**.
 ## File
 | File | Nội dung | Hàm chính |
 |---|---|---|
-| `src/count.py` | Bước 1–2: gán nhãn liên thông bằng BFS (8 lân cận), lọc vùng nhiễu, đếm | `label_components`, `remove_small`, `count_objects` |
-| `src/measure.py` | Bước 3: diện tích, tâm, khung bao, đường kính tương đương, tỉ lệ khung, độ đặc | `measure_objects`, `objects_table`, `suspicious` |
+| `src/count_b8.py` | Bước 1–2: gán nhãn liên thông bằng BFS (8 lân cận), lọc vùng nhiễu, đếm | `label_components`, `remove_small`, `count_objects` |
+| `src/measure_b8.py` | Bước 3: diện tích, tâm, khung bao, đường kính tương đương, tỉ lệ khung, độ đặc | `measure_objects`, `objects_table`, `suspicious` |
 | `src/visualize.py` | Bước 4: tô màu, viền, đánh số từng vật lên ảnh | `draw_objects`, `caption`, `grid` |
 | `src/evaluate.py` | Bước 5: % đếm đúng, MAE, sai lệch, theo mức Dễ / Vừa / Khó | `evaluate(pred_csv, label_csv)`, `result_table`, `errors` |
 | `baseline_opencv/pipeline_opencv.py` | Pipeline đối chứng: cùng thiết kế, dùng hàm OpenCV | `run_opencv` |
@@ -29,7 +29,7 @@ trong `results/`.
 
 Dùng trong code khác:
 ```python
-from src.count import count_objects
+from src.count_b8 import count_objects
 n, objects = count_objects(anh_nhi_phan)                # objects: list[dict] - id, dien_tich, tam_x, tam_y,
                                                         # x, y, rong, cao, duong_kinh, ti_le_khung, do_dac
 from src.evaluate import evaluate

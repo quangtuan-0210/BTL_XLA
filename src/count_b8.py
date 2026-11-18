@@ -18,7 +18,7 @@ from collections import deque
 
 import numpy as np
 
-from .measure import measure_objects
+from .measure_b8 import measure_objects
 
 N8 = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 N4 = [(-1, 0), (0, -1), (0, 1), (1, 0)]

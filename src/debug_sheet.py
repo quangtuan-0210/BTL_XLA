@@ -3,7 +3,7 @@ import os, sys, numpy as np, pandas as pd
 from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.pipeline import run
-from src.preprocess import resize_max
+from src.preprocess_b1_3 import resize_max
 split, out = sys.argv[1], sys.argv[2]
 kw = dict(a.split("=") for a in sys.argv[3:]); kw = {k: float(v) if "." in v else int(v) for k, v in kw.items()}
 lab = pd.read_csv("data/labels.csv"); lab = lab[lab.tap == split] if split != "all" else lab

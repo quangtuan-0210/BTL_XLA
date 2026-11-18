@@ -5,8 +5,8 @@ import os, sys, tempfile
 import numpy as np
 import pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.count import label_components, remove_small, count_objects
-from src.measure import measure_objects, suspicious
+from src.count_b8 import label_components, remove_small, count_objects
+from src.measure_b8 import measure_objects, suspicious
 from src.evaluate import evaluate
 from src.visualize import draw_objects
 

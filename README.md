@@ -11,8 +11,8 @@ OpenCV chỉ dùng để so sánh (`baseline_opencv/`).
 ## Cấu trúc
 | Thư mục | Nội dung | Ai làm |
 |---|---|---|
-| `src/preprocess.py`, `segment.py`, `morphology.py`, `separate.py`, `pipeline.py` | Thuật toán tiền xử lý → tách vật dính | TV1 |
-| `src/count.py`, `measure.py`, `visualize.py`, `evaluate.py` | Gán nhãn BFS, đếm, đo từng vật, vẽ kết quả, đánh giá | TV2 |
+| `src/preprocess_b1_3.py`, `segment_b2_4.py`, `morphology_b5.py`, `separate_b6_7.py`, `pipeline.py` | Thuật toán tiền xử lý → tách vật dính | TV1 |
+| `src/count_b8.py`, `measure_b8.py`, `visualize.py`, `evaluate.py` | Gán nhãn BFS, đếm, đo từng vật, vẽ kết quả, đánh giá | TV2 |
 | `app.py` | Giao diện Streamlit (chọn ảnh, chỉnh tham số, xem từng bước, bảng thông tin vật) | TV3 |
 | `src/denomination.py` *(chưa có)* | Đoán mệnh giá, tính tổng tiền | TV3 |
 | `data/` | 90 ảnh xu + `labels.csv`; 40 ảnh tế bào BBBC004 – xem `data/README_data.md` | TV3 |

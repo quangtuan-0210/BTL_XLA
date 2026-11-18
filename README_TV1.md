@@ -6,10 +6,10 @@ OpenCV chỉ dùng trong `baseline_opencv/` để **so sánh**.
 ## File
 | File | Nội dung | Hàm chính |
 |---|---|---|
-| `src/preprocess.py` | Bước 1–3 | `to_gray`, `resize_max`, `conv2d`, `gaussian_kernel`, `gaussian_blur`, `preprocess` |
-| `src/segment.py` | Bước 4 | `otsu_threshold`, `segment` (ảnh xám), `color_difference` + `segment_color` (độ khác màu nền) |
-| `src/morphology.py` | Bước 5 | `disk`, `erode`, `dilate`, `closing`, `fill_holes`, `clean` |
-| `src/separate.py` | Bước 6–7 | `distance_transform` (co lặp, Chương 5), `find_markers`, `watershed`, `separate`, `label_bfs` |
+| `src/preprocess_b1_3.py` | Bước 1–3 | `to_gray`, `resize_max`, `conv2d`, `gaussian_kernel`, `gaussian_blur`, `preprocess` |
+| `src/segment_b2_4.py` | Bước 2, 4 | `otsu_threshold`, `segment` (ảnh xám), `color_difference` + `segment_color` (độ khác màu nền) |
+| `src/morphology_b5.py` | Bước 5 | `disk`, `erode`, `dilate`, `closing`, `fill_holes`, `clean` |
+| `src/separate_b6_7.py` | Bước 6–7 | `distance_transform` (co lặp, Chương 5), `find_markers`, `watershed`, `separate`, `label_bfs` |
 | `src/pipeline.py` | Ghép các bước | `run(img)` → dict ảnh từng bước + `count` |
 | `baseline_opencv/compare_tv1.py` | So sánh từng bước với OpenCV | → `results/tv1/so_sanh_opencv.csv` |
 | `src/figure_steps.py`, `src/debug_sheet.py` | Vẽ hình minh họa / tìm lỗi | → `results/tv1/*.png` |

@@ -17,9 +17,9 @@ import cv2
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.segment import color_difference
+from src.segment_b2_4 import color_difference
 from src.pipeline import DEFAULT
-from src.morphology import disk
+from src.morphology_b5 import disk
 
 
 def _se(r):

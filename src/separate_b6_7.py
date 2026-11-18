@@ -20,7 +20,7 @@ import heapq
 from collections import deque
 import numpy as np
 
-from .morphology import dilate, disk, erode
+from .morphology_b5 import dilate, disk, erode
 
 
 # ---------------- Bước 6: distance transform ----------------

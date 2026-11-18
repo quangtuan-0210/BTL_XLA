@@ -10,9 +10,9 @@ import cv2, numpy as np, pandas as pd
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.pipeline import run
-from src.count import label_components
-from src.measure import measure_objects
-from src.separate import label_bfs
+from src.count_b8 import label_components
+from src.measure_b8 import measure_objects
+from src.separate_b6_7 import label_bfs
 
 
 def timed(f, *a, rep=3):

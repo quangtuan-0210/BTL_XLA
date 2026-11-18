@@ -3,12 +3,12 @@
     ảnh màu -> preprocess -> segment (Otsu) -> clean (hình thái học) -> separate (watershed)
             -> count_objects (gán nhãn BFS, lọc nhiễu, đo từng vật)
 """
-from .preprocess import preprocess
-from .segment import segment, color_difference, segment_color
-from .preprocess import resize_max, gaussian_blur
-from .morphology import clean
-from .separate import separate
-from .count import count_objects
+from .preprocess_b1_3 import preprocess
+from .segment_b2_4 import segment, color_difference, segment_color
+from .preprocess_b1_3 import resize_max, gaussian_blur
+from .morphology_b5 import clean
+from .separate_b6_7 import separate
+from .count_b8 import count_objects
 
 DEFAULT = dict(max_side=512, blur_size=5, sigma=1.0,
                close_r=3, peak_ratio=0.4, min_ratio=0.2, min_area_ratio=0.05, mode="color")

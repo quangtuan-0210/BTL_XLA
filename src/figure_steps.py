@@ -5,7 +5,7 @@ matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.pipeline import run
-from src.preprocess import resize_max
+from src.preprocess_b1_3 import resize_max
 f, out = sys.argv[1], sys.argv[2]
 img = np.array(Image.open("data/images/" + f).convert("RGB")); a = run(img); small, _ = resize_max(img, 512)
 rng = np.random.default_rng(3); pal = rng.integers(60, 255, (a["labels"].max() + 1, 3)); pal[0] = 0

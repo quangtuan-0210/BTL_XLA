@@ -52,7 +52,7 @@ def closing(binary, se):
 def fill_holes(binary):
     """Lấp lỗ: gán nhãn các vùng NỀN. Vùng nền nào chạm viền ảnh là nền thật;
     vùng nền nào không chạm viền là nằm kín bên trong vật -> đó là lỗ -> đổi thành vật."""
-    from .separate import label_bfs           # dùng lại hàm gán nhãn (tránh import vòng)
+    from .separate_b6_7 import label_bfs           # dùng lại hàm gán nhãn (tránh import vòng)
     b = binary.astype(bool)
     lab, _ = label_bfs(~b)
     border = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))

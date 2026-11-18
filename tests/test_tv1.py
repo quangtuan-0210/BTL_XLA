@@ -4,10 +4,10 @@ Chạy từ thư mục gốc dự án:  python tests/test_tv1.py
 import os, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.preprocess import to_gray, gaussian_kernel, conv2d
-from src.segment import otsu_threshold, segment
-from src.morphology import disk, erode, dilate, closing, fill_holes
-from src.separate import distance_transform, label_bfs, separate
+from src.preprocess_b1_3 import to_gray, gaussian_kernel, conv2d
+from src.segment_b2_4 import otsu_threshold, segment
+from src.morphology_b5 import disk, erode, dilate, closing, fill_holes
+from src.separate_b6_7 import distance_transform, label_bfs, separate
 
 OK = 0
 N = 0
