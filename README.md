@@ -42,11 +42,8 @@ pip install -r requirements.txt
 |---|---|---|
 | `python tests/test_tv1.py` | Kiểm thử phần TV1 (~1 giây) | không |
 | `python tests/test_tv2.py` | Kiểm thử phần TV2 (~1 giây) | không |
-| `python src/run_tv1_eval.py chinh` | Đếm trên tập chỉnh, có/không watershed | `results/tv1/xu_chinh.csv` |
 | `python baseline_opencv/compare_tv1.py` | So từng bước TV1 với OpenCV | `results/tv1/so_sanh_opencv.csv` |
 | `python baseline_opencv/compare_tv2.py` | So gán nhãn + đo với OpenCV | `results/tv2/so_sanh_opencv_tv2.csv` |
-| `python src/run_tv2_eval.py chinh` | Đánh giá 4 cấu hình trên tập chỉnh | `results/tv2/*_chinh.csv` |
-| `python src/run_tv2_figures.py chinh` | Biểu đồ + ảnh minh họa | `results/tv2/*_chinh.png` |
 | `streamlit run app.py` | Giao diện, trình duyệt mở http://localhost:8501 | không |
 
 Các lệnh có ghi file sẽ ghi đè kết quả đã commit (cột thời gian luôn thay đổi theo máy).

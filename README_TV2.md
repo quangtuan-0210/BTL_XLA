@@ -10,8 +10,6 @@ OpenCV chỉ dùng trong `baseline_opencv/` để **so sánh**.
 | `src/measure.py` | Bước 3: diện tích, tâm, khung bao, đường kính tương đương, tỉ lệ khung, độ đặc | `measure_objects`, `objects_table`, `suspicious` |
 | `src/visualize.py` | Bước 4: tô màu, viền, đánh số từng vật lên ảnh | `draw_objects`, `caption`, `grid` |
 | `src/evaluate.py` | Bước 5: % đếm đúng, MAE, sai lệch, theo mức Dễ / Vừa / Khó | `evaluate(pred_csv, label_csv)`, `result_table`, `errors` |
-| `src/run_tv2_eval.py` | Bước 6: chạy 4 cấu hình pipeline trên một tập ảnh | → `results/tv2/bang_ket_qua_<tap>.csv`, `du_doan_<tap>.csv`, `vat_<tap>.csv` |
-| `src/run_tv2_figures.py` | Biểu đồ + ảnh minh họa thành công / thất bại | → `results/tv2/hinh*.png`, `minh_hoa_*.png`, `that_bai_<tap>.csv` |
 | `baseline_opencv/pipeline_opencv.py` | Pipeline đối chứng: cùng thiết kế, dùng hàm OpenCV | `run_opencv` |
 | `baseline_opencv/compare_tv2.py` | So sánh gán nhãn + đo với OpenCV | → `results/tv2/so_sanh_opencv_tv2.csv` |
 | `tests/test_tv2.py` | 27 bài test trên ảnh tổng hợp nhỏ (biết trước đáp án) | |
@@ -24,12 +22,10 @@ OpenCV chỉ dùng trong `baseline_opencv/` để **so sánh**.
 ```
 python tests/test_tv2.py                    # kiểm thử nhanh, ~1 giây
 python baseline_opencv/compare_tv2.py       # so gán nhãn + đo với OpenCV
-python src/run_tv2_eval.py chinh            # đánh giá trên tập chỉnh (~20 giây)
-python src/run_tv2_figures.py chinh         # biểu đồ + ảnh minh họa
 ```
 Tập kiểm tra **đã chạy 1 lần** (17/11/2026) với tham số chốt trên tập chỉnh; kết quả nằm trong
-`results/tv2/*_kiem_tra.*`. Không chạy lại `run_tv2_eval.py kiem_tra` trừ khi cả nhóm đổi tham số
-(chọn lại trên tập chỉnh) và ghi rõ điều đó trong báo cáo.
+`results/tv2/*_kiem_tra.*`. Các script chạy đánh giá đã được bỏ khỏi bản nộp (chỉ giữ thuật toán); bảng kết quả đã lưu
+trong `results/`.
 
 Dùng trong code khác:
 ```python

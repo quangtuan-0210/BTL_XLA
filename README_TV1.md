@@ -12,16 +12,12 @@ OpenCV chỉ dùng trong `baseline_opencv/` để **so sánh**.
 | `src/separate.py` | Bước 6–7 | `distance_transform` (co lặp, Chương 5), `find_markers`, `watershed`, `separate`, `label_bfs` |
 | `src/pipeline.py` | Ghép các bước | `run(img)` → dict ảnh từng bước + `count` |
 | `baseline_opencv/compare_tv1.py` | So sánh từng bước với OpenCV | → `results/tv1/so_sanh_opencv.csv` |
-| `src/run_tv1_eval.py` | Đếm xu, có/không tách | → `results/tv1/xu_<tap>.csv` |
-| `src/run_bbbc004.py` | Ảnh tế bào: IoU + đếm | → `results/tv1/bbbc004.csv` |
 | `src/figure_steps.py`, `src/debug_sheet.py` | Vẽ hình minh họa / tìm lỗi | → `results/tv1/*.png` |
 
 ## Chạy
 ```
 pip install numpy pillow pandas matplotlib opencv-python
-python src/run_tv1_eval.py chinh          # đếm trên tập chỉnh
 python baseline_opencv/compare_tv1.py     # so sánh với OpenCV
-python src/run_bbbc004.py                 # ảnh tế bào
 python src/figure_steps.py <ten_anh.jpg> ra.png
 ```
 Dùng trong code khác:
