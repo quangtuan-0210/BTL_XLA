@@ -3,7 +3,6 @@
 Phần tử cấu trúc (structuring element, SE) là một "con dấu" nhỏ, ví dụ hình tròn 5x5.
     Co (erosion)  : điểm giữ lại là 1 chỉ khi con dấu đặt ở đó NẰM TRỌN trong vật -> vật nhỏ lại
     Giãn (dilation): điểm thành 1 nếu con dấu đặt ở đó CHẠM vào vật -> vật to ra
-    Mở (opening)  = co rồi giãn  : xóa chấm trắng nhỏ, cắt cầu nối mảnh giữa hai vật
     Đóng (closing)= giãn rồi co  : lấp khe nứt, lỗ nhỏ bên trong vật
     Lấp lỗ (fill_holes): lấp toàn bộ lỗ bên trong vật (ví dụ lỗ giữa đồng 5 yên)
 """
@@ -46,10 +45,6 @@ def dilate(binary, se):
     return out.astype(np.uint8)
 
 
-def opening(binary, se):
-    return dilate(erode(binary, se), se)
-
-
 def closing(binary, se):
     return erode(dilate(binary, se), se)
 
@@ -65,10 +60,10 @@ def fill_holes(binary):
     return (b | holes).astype(np.uint8)
 
 
-def clean(binary, open_r=2, close_r=3, fill=True):
-    """Gộp bước làm sạch: đóng (nối nét đứt) -> lấp lỗ -> mở (xóa vụn nhỏ)."""
+def clean(binary, close_r=3, fill=True):
+    """Gộp bước làm sạch: đóng (nối nét đứt) -> lấp lỗ.
+    (Không cần phép mở để xóa vụn nhỏ: bước đếm đã bỏ vùng nhỏ hơn 5% vật lớn nhất.)"""
     b = binary
     if close_r: b = closing(b, disk(close_r))
     if fill: b = fill_holes(b)
-    if open_r: b = opening(b, disk(open_r))
     return b

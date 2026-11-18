@@ -1,7 +1,7 @@
 buoc,ham_opencv,ti_le_giong_pct,ms_tu_viet,ms_opencv,cham_hon_x_lan
-1. Gán nhãn BFS (8 lân cận),connectedComponents,100.0,25.07,0.153,164.0
-1b. Gán nhãn theo đoạn chạy (bản TV1),connectedComponents,100.0,1.48,0.153,10.0
+1. Gán nhãn BFS (8 lân cận),connectedComponents,100.0,30.95,0.133,232.0
+1b. Gán nhãn theo đoạn chạy (bản TV1),connectedComponents,100.0,2.69,0.133,20.0
 3a. Diện tích,ConnectedComponentsWithStats: AREA,100.0,,,
 3b. Khung bao,"...WithStats: LEFT, TOP, WIDTH, HEIGHT",100.0,,,
 "3c. Tâm (lệch <= 0,05 px)",...WithStats: centroids,100.0,,,
-Gán nhãn + đo (tổng thời gian),connectedComponentsWithStats,100.0,27.15,0.454,60.0
+Gán nhãn + đo (tổng thời gian),connectedComponentsWithStats,100.0,33.72,0.505,67.0

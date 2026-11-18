@@ -10,22 +10,22 @@ from .morphology import clean
 from .separate import separate
 from .count import count_objects
 
-DEFAULT = dict(max_side=512, blur_size=5, sigma=1.0, median_size=0,
-               open_r=2, close_r=3, peak_ratio=0.4, min_ratio=0.2, min_area_ratio=0.05, mode="color")
+DEFAULT = dict(max_side=512, blur_size=5, sigma=1.0,
+               close_r=3, peak_ratio=0.4, min_ratio=0.2, min_area_ratio=0.05, mode="color")
 
 
 def run(img_rgb, use_separate=True, **kw):
     """Chạy cả pipeline. Trả về dict chứa ảnh từng bước, số lượng (count),
     ảnh nhãn (labels, kích thước ảnh đã thu nhỏ) và thông số từng vật (objects, đổi về ảnh gốc)."""
     p = {**DEFAULT, **kw}
-    gray, scale = preprocess(img_rgb, p["max_side"], p["blur_size"], p["sigma"], p["median_size"])
+    gray, scale = preprocess(img_rgb, p["max_side"], p["blur_size"], p["sigma"])
     if p["mode"] == "color":   # tách theo độ khác màu nền
         small, _ = resize_max(img_rgb, p["max_side"])
         feat = gaussian_blur(color_difference(small), p["blur_size"], p["sigma"])
         binary, t = segment_color(feat)
     else:                      # tách theo ảnh xám (Otsu cổ điển)
         binary, t = segment(gray)
-    cleaned = clean(binary, p["open_r"], p["close_r"])
+    cleaned = clean(binary, p["close_r"])
     if use_separate:
         sep, lab_ws, dist = separate(cleaned, p["peak_ratio"], p["min_ratio"], return_labels=True)
     else:

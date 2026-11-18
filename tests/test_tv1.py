@@ -4,9 +4,9 @@ Chạy từ thư mục gốc dự án:  python tests/test_tv1.py
 import os, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.preprocess import to_gray, gaussian_kernel, conv2d, median_filter
+from src.preprocess import to_gray, gaussian_kernel, conv2d
 from src.segment import otsu_threshold, segment
-from src.morphology import disk, erode, dilate, opening, fill_holes
+from src.morphology import disk, erode, dilate, closing, fill_holes
 from src.separate import distance_transform, label_bfs, separate
 
 OK = 0
@@ -31,15 +31,13 @@ print("Bước 1 - Xám hóa")
 check("đỏ thuần (255,0,0) -> 76.245", np.isclose(to_gray(np.array([[[255, 0, 0]]]))[0, 0], 76.245))
 check("trắng -> 255", np.isclose(to_gray(np.full((2, 2, 3), 255))[0, 0], 255))
 
-print("Bước 2-3 - Tích chập, Gauss, trung vị")
+print("Bước 2-3 - Tích chập, Gauss")
 img = np.random.default_rng(0).integers(0, 256, (20, 30)).astype(float)
 I = np.zeros((3, 3)); I[1, 1] = 1
 check("conv2d với kernel đơn vị giữ nguyên ảnh", np.allclose(conv2d(img, I), img))
 k = gaussian_kernel(5, 1.0)
 check("kernel Gauss tổng = 1", np.isclose(k.sum(), 1))
 check("kernel Gauss đối xứng, tâm lớn nhất", np.allclose(k, k.T) and k[2, 2] == k.max())
-noisy = np.full((15, 15), 100.0); noisy[7, 7] = 255
-check("trung vị 3x3 xóa chấm nhiễu", np.all(median_filter(noisy, 3) == 100))
 
 print("Bước 4 - Otsu")
 g = np.full((50, 100), 200.0); g[:, :50] = 50
@@ -57,8 +55,8 @@ print("Bước 5 - Hình thái học")
 sq = np.zeros((30, 30), np.uint8); sq[10:20, 10:20] = 1
 check("co bằng ô 3x3 -> vuông 10x10 còn 8x8", erode(sq, np.ones((3, 3), np.uint8)).sum() == 64)
 check("giãn bằng ô 3x3 -> vuông 10x10 thành 12x12", dilate(sq, np.ones((3, 3), np.uint8)).sum() == 144)
-dot = sq.copy(); dot[2, 2] = 1
-check("mở xóa chấm 1 pixel, giữ vật", np.array_equal(opening(dot, disk(1)), opening(sq, disk(1))) and opening(dot, disk(1))[2, 2] == 0)
+gap = sq.copy(); gap[:, 15] = 0
+check("đóng lấp khe hở 1 pixel", closing(gap, disk(1))[11:19, 15].all())
 ring = sq.copy(); ring[13:17, 13:17] = 0
 check("lấp lỗ: vòng có lỗ -> vuông đặc", np.array_equal(fill_holes(ring), sq))
 

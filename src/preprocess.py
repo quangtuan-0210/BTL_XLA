@@ -6,7 +6,6 @@ Các hàm:
     conv2d         : tích chập 2D tổng quát (dùng chung cho mọi bộ lọc)
     gaussian_kernel: sinh ma trận lọc Gauss
     gaussian_blur  : làm mịn bằng lọc Gauss
-    median_filter  : lọc trung vị (xóa nhiễu muối tiêu)
     preprocess     : gộp các bước trên - đúng tên hàm đã thống nhất trong doc chia việc
 """
 import numpy as np
@@ -93,30 +92,13 @@ def gaussian_blur(img, size=5, sigma=1.0):
     return conv2d(img, gaussian_kernel(size, sigma))
 
 
-def median_filter(img, size=3):
-    """Lọc trung vị: thay mỗi điểm bằng giá trị ĐỨNG GIỮA của vùng size x size.
-
-    Khác với lọc Gauss (lấy trung bình), lọc trung vị loại bỏ hẳn các chấm nhiễu lẻ
-    mà không làm nhòe đường biên của đồng xu.
-    """
-    img = np.asarray(img, dtype=np.float64)
-    r = size // 2
-    padded = np.pad(img, r, mode="reflect")
-    h, w = img.shape
-    # xếp chồng size*size bản dịch của ảnh, rồi lấy trung vị theo chiều xếp chồng
-    stack = np.stack([padded[i:i + h, j:j + w] for i in range(size) for j in range(size)])
-    return np.median(stack, axis=0)
-
-
-def preprocess(img_rgb, max_side=512, blur_size=5, sigma=1.0, median_size=0):
-    """Gộp bước tiền xử lý: thu nhỏ -> xám hóa -> (lọc trung vị) -> làm mịn Gauss.
+def preprocess(img_rgb, max_side=512, blur_size=5, sigma=1.0):
+    """Gộp bước tiền xử lý: thu nhỏ -> xám hóa -> làm mịn Gauss.
 
     Trả về (ảnh_xám_đã_làm_mịn, tỉ_lệ_thu_nhỏ). tỉ lệ dùng để đổi kích thước về ảnh gốc.
     """
     small, scale = resize_max(img_rgb, max_side)
     gray = to_gray(small)
-    if median_size and median_size > 1:
-        gray = median_filter(gray, median_size)
     if blur_size and blur_size > 1:
         gray = gaussian_blur(gray, blur_size, sigma)
     return np.clip(gray, 0, 255), scale

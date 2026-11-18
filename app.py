@@ -60,20 +60,12 @@ else:
         img_bytes = fh.read()
     truth = int(sub[sub.file == f].so_luong.iloc[0])
 
-st.sidebar.header("2. Tham số")
+st.sidebar.header("2. Tùy chọn")
 p = dict(DEFAULT)
 p["mode"] = st.sidebar.radio("Cách tách nền", ["color", "gray"],
                              format_func={"color": "Độ khác màu nền (khuyên dùng)", "gray": "Ảnh xám (Otsu cổ điển)"}.get)
 use_sep = st.sidebar.checkbox("Tách vật dính nhau (watershed)", value=True)
-with st.sidebar.expander("Tham số nâng cao"):
-    p["max_side"] = st.slider("Thu nhỏ ảnh về cạnh dài (px)", 256, 1024, DEFAULT["max_side"], 64)
-    p["blur_size"] = st.select_slider("Kích thước lọc Gauss", [1, 3, 5, 7, 9], DEFAULT["blur_size"])
-    p["median_size"] = st.select_slider("Lọc trung vị (0 = tắt)", [0, 3, 5], DEFAULT["median_size"])
-    p["close_r"] = st.slider("Bán kính phép đóng", 0, 8, DEFAULT["close_r"])
-    p["open_r"] = st.slider("Bán kính phép mở", 0, 8, DEFAULT["open_r"])
-    p["peak_ratio"] = st.slider("Cửa sổ tìm đỉnh (tỉ lệ)", 0.1, 0.8, DEFAULT["peak_ratio"], 0.05)
-    p["min_ratio"] = st.slider("Độ cao tối thiểu của đỉnh (tỉ lệ)", 0.05, 0.6, DEFAULT["min_ratio"], 0.05)
-    p["min_area_ratio"] = st.slider("Bỏ vùng nhỏ hơn (tỉ lệ vật lớn nhất)", 0.0, 0.3, DEFAULT["min_area_ratio"], 0.01)
+st.sidebar.caption("Các tham số khác dùng giá trị mặc định đã chọn trên dữ liệu (xem src/pipeline.py).")
 
 # ---------------- nội dung chính ----------------
 st.title("Ứng dụng phát hiện và đếm đối tượng trong ảnh")

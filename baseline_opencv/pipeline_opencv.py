@@ -72,8 +72,6 @@ def run_opencv(img_rgb, use_separate=True, **kw):
     if p["close_r"]:
         m = cv2.morphologyEx(m, cv2.MORPH_CLOSE, _se(p["close_r"]), **BORDER)
     m = fill_holes_cv(m)
-    if p["open_r"]:
-        m = cv2.morphologyEx(m, cv2.MORPH_OPEN, _se(p["open_r"]), **BORDER)
     cleaned = m
 
     if use_separate and cleaned.any():
