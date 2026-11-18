@@ -65,7 +65,6 @@ p = dict(DEFAULT)
 p["mode"] = st.sidebar.radio("Cách tách nền", ["color", "gray"],
                              format_func={"color": "Độ khác màu nền (khuyên dùng)", "gray": "Ảnh xám (Otsu cổ điển)"}.get)
 use_sep = st.sidebar.checkbox("Tách vật dính nhau (watershed)", value=True)
-st.sidebar.caption("Các tham số khác dùng giá trị mặc định đã chọn trên dữ liệu (xem src/pipeline.py).")
 
 # ---------------- nội dung chính ----------------
 st.title("Ứng dụng phát hiện và đếm đối tượng trong ảnh")
