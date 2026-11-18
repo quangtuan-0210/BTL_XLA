@@ -45,7 +45,8 @@ def run_cached(img_bytes, params, use_separate):
 
 # ---------------- thanh bên: chọn ảnh + tham số ----------------
 st.sidebar.header("1. Chọn ảnh")
-src = st.sidebar.radio("Nguồn ảnh", ["Tải ảnh lên", "Ảnh mẫu trong bộ dữ liệu"])
+co_du_lieu = os.path.exists(os.path.join(ROOT, "data", "labels.csv"))   # bản nộp chỉ có code -> không có ảnh mẫu
+src = st.sidebar.radio("Nguồn ảnh", ["Tải ảnh lên", "Ảnh mẫu trong bộ dữ liệu"] if co_du_lieu else ["Tải ảnh lên"])
 img_bytes, truth = None, None
 if src == "Tải ảnh lên":
     up = st.sidebar.file_uploader("Ảnh JPG / PNG", type=["jpg", "jpeg", "png", "bmp", "tif", "tiff"])
