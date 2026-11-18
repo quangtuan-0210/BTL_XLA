@@ -62,8 +62,7 @@ else:
 
 st.sidebar.header("2. Tùy chọn")
 p = dict(DEFAULT)
-p["mode"] = st.sidebar.radio("Cách tách nền", ["color", "gray"],
-                             format_func={"color": "Độ khác màu nền (khuyên dùng)", "gray": "Ảnh xám (Otsu cổ điển)"}.get)
+# tách nền luôn theo độ khác màu nền (mode="color", mặc định trong DEFAULT)
 use_sep = st.sidebar.checkbox("Tách vật dính nhau (watershed)", value=True)
 
 # ---------------- nội dung chính ----------------
