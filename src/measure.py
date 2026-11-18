@@ -59,9 +59,11 @@ def measure_objects(labels, scale=1.0):
     return objects
 
 
-COLUMNS_VI = {"id": "Vật", "dien_tich": "Diện tích (px²)", "tam_x": "Tâm x", "tam_y": "Tâm y",
-              "x": "Khung x", "y": "Khung y", "rong": "Rộng (px)", "cao": "Cao (px)",
-              "duong_kinh": "Đường kính (px)", "ti_le_khung": "Rộng/Cao", "do_dac": "Độ đặc"}
+# Đơn vị: px = điểm ảnh, tính trên ảnh đã thu nhỏ (gốc tọa độ ở góc trên-trái);
+# Rộng/Cao và Độ đặc là tỉ số nên không có đơn vị.
+COLUMNS_VI = {"id": "Vật", "dien_tich": "Diện tích (px²)", "tam_x": "Tâm x (px)", "tam_y": "Tâm y (px)",
+              "x": "Khung x (px)", "y": "Khung y (px)", "rong": "Rộng (px)", "cao": "Cao (px)",
+              "duong_kinh": "Đường kính (px)", "ti_le_khung": "Rộng/Cao (tỉ số)", "do_dac": "Độ đặc (0–1)"}
 
 
 def objects_table(objects):

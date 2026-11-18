@@ -109,4 +109,6 @@ for col, (name, im) in zip(cols, steps):
 st.subheader("Thông tin từng vật")
 tbl = objects_table(res["objects"])
 st.dataframe(tbl, hide_index=True, width="stretch")
+st.caption("Đơn vị: px = điểm ảnh, đo trên ảnh đã thu nhỏ (cạnh dài 512 px); tọa độ tính từ góc trên-trái. "
+           "Rộng/Cao là tỉ số (≈ 1 với vật tròn); Độ đặc = diện tích / (rộng × cao), từ 0 đến 1 (hình tròn ≈ 0,785).")
 st.download_button("Tải bảng (CSV)", tbl.to_csv(index=False).encode("utf-8-sig"), "thong_tin_vat.csv", "text/csv")
