@@ -1,4 +1,4 @@
-"""TV1 - Bước 5: Hình thái học trên ảnh nhị phân (tự cài đặt).
+""" Bước 5: Hình thái học trên ảnh nhị phân (tự cài đặt).
 
 Phần tử cấu trúc (structuring element, SE) là một "con dấu" nhỏ, ví dụ hình tròn 5x5.
     Co (erosion)  : điểm giữ lại là 1 chỉ khi con dấu đặt ở đó NẰM TRỌN trong vật -> vật nhỏ lại

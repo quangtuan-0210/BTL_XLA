@@ -1,4 +1,4 @@
-"""TV1 - Bước 4: Tách vật khỏi nền bằng ngưỡng Otsu (tự cài đặt).
+""" Bước 2, 4: Tách vật khỏi nền bằng ngưỡng Otsu (tự cài đặt).
 
 Ý tưởng Otsu: ảnh xám có 256 mức sáng. Thử lần lượt từng ngưỡng t = 0..255,
 chia điểm ảnh thành 2 nhóm (tối hơn t / sáng hơn t). Ngưỡng tốt nhất là ngưỡng làm

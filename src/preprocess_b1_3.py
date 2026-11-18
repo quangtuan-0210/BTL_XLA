@@ -1,4 +1,4 @@
-"""TV1 - Bước 1-3: Tiền xử lý ảnh (tự cài đặt bằng NumPy, không dùng hàm xử lý ảnh của OpenCV).
+""" Bước 1-3: Tiền xử lý ảnh (tự cài đặt bằng NumPy, không dùng hàm xử lý ảnh của OpenCV).
 
 Các hàm:
     to_gray        : ảnh màu  -> ảnh xám

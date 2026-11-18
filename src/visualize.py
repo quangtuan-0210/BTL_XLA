@@ -1,4 +1,4 @@
-"""TV2 - Bước 4: Vẽ kết quả - tô màu từng vật, vẽ viền, đánh số lên ảnh gốc."""
+"""Vẽ kết quả - tô màu từng vật, vẽ viền, đánh số lên ảnh gốc."""
 import numpy as np
 from PIL import Image, ImageDraw
 

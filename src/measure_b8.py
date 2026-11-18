@@ -1,4 +1,4 @@
-"""TV2 - Bước 3: Đo thông số từng vật từ ảnh nhãn.
+""" Bước 8: Đo thông số từng vật từ ảnh nhãn.
 
 Với vật có nhãn i, gọi S_i là tập điểm ảnh của nó (N_i điểm):
     Diện tích        A   = N_i                                (số điểm ảnh)

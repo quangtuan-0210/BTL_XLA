@@ -1,4 +1,4 @@
-"""TV2 - Bước 1-2: Gán nhãn thành phần liên thông (BFS, 8 lân cận) -> lọc vùng nhiễu -> đếm.
+""" Bước 8: Gán nhãn thành phần liên thông (BFS, 8 lân cận) -> lọc vùng nhiễu -> đếm.
 
 Ý tưởng gán nhãn bằng BFS (tìm kiếm theo chiều rộng):
     Duyệt ảnh từ trên xuống, trái sang phải. Gặp một điểm trắng CHƯA có nhãn:

@@ -1,4 +1,4 @@
-"""TV2 - Bước 5: Đánh giá định lượng số lượng đếm được so với đáp án.
+"""Đánh giá định lượng số lượng đếm được so với đáp án.
 
 Chỉ số (với mỗi ảnh i: d_i = số đếm được, t_i = số thật, e_i = d_i - t_i):
     Tỉ lệ đếm đúng  = (số ảnh có d_i = t_i) / (tổng số ảnh)

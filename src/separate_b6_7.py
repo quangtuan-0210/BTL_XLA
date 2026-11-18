@@ -1,4 +1,4 @@
-"""TV1 - Bước 6-7: Tách các vật dính nhau (tự cài đặt).
+""" Bước 6-7: Tách các vật dính nhau (tự cài đặt).
 
 Bước 6 - Biến đổi khoảng cách (distance transform):
     Với mỗi điểm thuộc vật, tính khoảng cách tới nền.

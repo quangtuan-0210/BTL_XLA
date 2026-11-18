@@ -28,7 +28,7 @@ OpenCV chỉ dùng để so sánh (`baseline_opencv/`).
 | Tự viết, bỏ watershed | 27,8% | 3,44 | 75 ms |
 | OpenCV, cùng thiết kế | 59,7% | 2,00 | 9 ms |
 
-Tập chỉnh (18 ảnh, dùng chọn tham số): 77,8%, MAE 0,44. Phân tích và phân tích thất bại: `README_TV2.md`.
+Tập chỉnh (18 ảnh, dùng chọn tham số): 77,8%, MAE 0,44.
 
 ## Cài đặt và chạy
 Chạy mọi lệnh từ thư mục gốc dự án (các script đọc `data/...` theo đường dẫn tương đối).
@@ -67,4 +67,3 @@ kq["binary"], kq["cleaned"], kq["separated"], kq["labels"]   # ảnh từng bư�
 - Bộ Kaggle gốc (1.444 ảnh, ~115 MB) không đưa lên repo. Chỉ cần nếu muốn chạy lại `data_tools/step1..5`:
   tải "Count Coins Image Dataset" trên Kaggle, giải nén vào `archive/`.
 
-Chi tiết từng phần: `README_TV1.md`, `README_TV2.md`.
