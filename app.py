@@ -65,6 +65,9 @@ st.sidebar.header("2. Tùy chọn")
 p = dict(DEFAULT)
 # tách nền luôn theo độ khác màu nền (mode="color", mặc định trong DEFAULT)
 use_sep = st.sidebar.checkbox("Tách vật dính nhau (watershed)", value=True)
+p["loai_vat"] = st.sidebar.radio(
+    "Loại vật", ["tron", "dai"],
+    format_func={"tron": "Gần tròn (đồng xu, tế bào)", "dai": "Dài, bề mặt trơn (viên thuốc) – thử nghiệm"}.get)
 
 # ---------------- nội dung chính ----------------
 st.title("Ứng dụng phát hiện và đếm đối tượng trong ảnh")
