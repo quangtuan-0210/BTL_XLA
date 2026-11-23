@@ -12,7 +12,7 @@
 8 lân cận (tính cả đường chéo) hay 4 lân cận?
     4 lân cận: chỉ trên/dưới/trái/phải. Một vật có viền răng cưa (chéo) có thể bị đếm thành nhiều mảnh.
     8 lân cận: thêm 4 đường chéo -> viền chéo vẫn liền. Đổi lại đường cắt giữa 2 vật phải dày
-    2 pixel (TV1 đã làm ở separate.py), nếu không 2 vật sẽ "đi chéo" qua đường cắt và bị gộp.
+    2 pixel (TV1 đã làm ở separate_b6_7.py), nếu không 2 vật sẽ "đi chéo" qua đường cắt và bị gộp.
 """
 from collections import deque
 

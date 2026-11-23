@@ -1,4 +1,4 @@
-"""Ghép toàn bộ pipeline: phần TV1 (tiền xử lý -> tách vật dính) + phần TV2 (đếm, đo).
+"""Ghép toàn bộ pipeline:
 
     ảnh màu -> preprocess -> segment (Otsu) -> clean (hình thái học) -> separate (watershed)
             -> count_objects (gán nhãn BFS, lọc nhiễu, đo từng vật)

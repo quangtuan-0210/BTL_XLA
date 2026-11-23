@@ -14,8 +14,8 @@ from PIL import Image
 
 from src.pipeline import DEFAULT, run
 from src.preprocess_b1_3 import resize_max
-from src.measure_b8 import objects_table, suspicious      # TV2: bảng thông số từng vật
-from src.visualize import draw_objects                  # TV2: vẽ kết quả
+from src.measure_b8 import objects_table, suspicious      
+from src.visualize import draw_objects                
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 st.set_page_config(page_title="Đếm đối tượng trong ảnh", layout="wide")

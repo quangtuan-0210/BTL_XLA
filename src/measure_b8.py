@@ -59,7 +59,7 @@ def measure_objects(labels, scale=1.0):
     return objects
 
 
-# Đơn vị: px = điểm ảnh, tính trên ảnh đã thu nhỏ (gốc tọa độ ở góc trên-trái);
+# Đơn vị: px = điểm ảnh, đã đổi về ảnh GỐC (gốc tọa độ ở góc trên-trái);
 # Rộng/Cao và Độ đặc là tỉ số nên không có đơn vị.
 COLUMNS_VI = {"id": "Vật", "dien_tich": "Diện tích (px²)", "tam_x": "Tâm x (px)", "tam_y": "Tâm y (px)",
               "x": "Khung x (px)", "y": "Khung y (px)", "rong": "Rộng (px)", "cao": "Cao (px)",
