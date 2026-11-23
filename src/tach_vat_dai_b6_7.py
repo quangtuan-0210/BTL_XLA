@@ -106,3 +106,22 @@ def separate_vat_dai(mask, small_rgb, q=40, co=2, ti_le_loi=0.2, ti_le_max=4.2):
     edge[:, :-1] |= dh; edge[:, 1:] |= dh
     edge[:-1, :] |= dv; edge[1:, :] |= dv
     return ((lab > 0) & ~edge).astype(np.uint8), lab, grad
+
+
+def chon_loai_vat(mask, day_min=0.9, so_vung_min=2, ti_le_dai=1.7):
+    """Tự chọn chế độ từ ảnh sau bước 5 (chưa tách vật dính).
+    Chỉ xét các vùng "đơn lẻ, gọn" (độ đầy >= day_min, tức một vật nằm riêng, không phải
+    khối nhiều vật dính). Có ít nhất so_vung_min vùng như vậy và trung vị dài/rộng của chúng
+    >= ti_le_dai -> vật dài ("dai"); còn lại -> gần tròn ("tron").
+    Ngưỡng chọn trên tập chỉnh: xu đơn lẻ có dài/rộng <= 1,44, viên thuốc >= 1,90."""
+    from .count_b8 import label_components
+    lab, _ = label_components(mask)
+    lab, k = remove_small(lab, min_area_ratio=0.05)
+    ti_le = []
+    for i in range(1, k + 1):
+        dai, rong, day = hinh_dang(*np.nonzero(lab == i))
+        if day >= day_min:
+            ti_le.append(dai / rong)
+    if len(ti_le) >= so_vung_min and np.median(ti_le) >= ti_le_dai:
+        return "dai"
+    return "tron"

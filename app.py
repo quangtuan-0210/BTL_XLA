@@ -66,8 +66,9 @@ p = dict(DEFAULT)
 # tách nền luôn theo độ khác màu nền (mode="color", mặc định trong DEFAULT)
 use_sep = st.sidebar.checkbox("Tách vật dính nhau (watershed)", value=True)
 p["loai_vat"] = st.sidebar.radio(
-    "Loại vật", ["tron", "dai"],
-    format_func={"tron": "Gần tròn (đồng xu, tế bào)", "dai": "Dài, bề mặt trơn (viên thuốc) – thử nghiệm"}.get)
+    "Loại vật", ["tron", "dai", "tu_dong"],
+    format_func={"tron": "Gần tròn (đồng xu, tế bào)", "dai": "Dài, bề mặt trơn (viên thuốc) – thử nghiệm",
+                 "tu_dong": "Tự chọn theo hình dạng – thử nghiệm"}.get)
 
 # ---------------- nội dung chính ----------------
 st.title("Ứng dụng phát hiện và đếm đối tượng trong ảnh")
@@ -87,6 +88,8 @@ c1.metric("Số vật đếm được", n)
 if truth is not None:
     c2.metric("Đáp án", truth, delta=n - truth, delta_color="inverse" if n != truth else "off")
 c3.metric("Thời gian xử lý", f"{res['seconds']:.2f} s")
+if p["loai_vat"] == "tu_dong":
+    st.caption("Máy tự chọn chế độ: " + {"tron": "vật gần tròn", "dai": "vật dài"}[res["loai_vat"]])
 if truth is not None:
     (st.success if n == truth else st.warning)("Đếm đúng." if n == truth else f"Lệch {n - truth:+d} so với đáp án.")
 

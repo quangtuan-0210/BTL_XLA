@@ -33,6 +33,23 @@ Tập chỉnh 10 ảnh (seed 1) để chọn tham số, tập kiểm tra 30 ản
 | Ảnh chụp thật 8 viên | 9 (cắt đôi + gộp) | 7 (1 vùng gộp 3 viên, 1 viên bị cắt dọc) |
 | Đồng xu, tập chỉnh 18 ảnh | 14/18 | 1/18 → **không dùng cho đồng xu** |
 
+## Chế độ tự chọn (`loai_vat="tu_dong"`)
+Sau bước 5, chỉ xét các vùng đơn lẻ, gọn (độ đầy ≥ 0,9). Có ≥ 2 vùng như vậy và trung vị
+dài/rộng ≥ 1,7 → chế độ vật dài; còn lại → gần tròn. Ngưỡng chọn trên tập chỉnh
+(18 ảnh xu, 10 ảnh thuốc): xu đơn lẻ có dài/rộng ≤ 1,44, viên thuốc ≥ 1,90.
+
+**Test hỗn hợp** (`danh_gia_hon_hop.py`): 72 ảnh xu kiểm tra + 30 ảnh thuốc kiểm tra.
+
+| Cách | Đồng xu (72) | Viên thuốc (30) | Tổng (102) |
+|---|---|---|---|
+| Luôn gần tròn (bản nộp) | 37 (51,4%), MAE 2,12 | 3 (10,0%), MAE 4,43 | 40 (39,2%), MAE 2,80 |
+| Luôn vật dài | 9 (12,5%), MAE 3,71 | 16 (53,3%), MAE 0,47 | 25 (24,5%), MAE 2,75 |
+| **Tự chọn** | **37 (51,4%)**, MAE 2,25 | 12 (40,0%), MAE 1,20 | **49 (48,0%)**, MAE 1,94 |
+
+Máy chọn đúng chế độ: 70/72 ảnh xu, 23/30 ảnh thuốc. Nếu chọn đúng hết thì tổng tối đa
+53/102 (52%). Ảnh thuốc bị chọn nhầm là ảnh có nhiều viên dính nhau, còn quá ít viên nằm riêng
+để nhận ra hình dạng dài (ảnh chụp thật 8 viên cũng bị chọn nhầm vì lý do này).
+
 ## Nhận xét
 - Trên ảnh tổng hợp, lỗi cắt đôi gần như hết (bản gốc thừa ở 27/30 ảnh). Lỗi còn lại chủ yếu
   là **gộp nhầm**: bước gộp hai nửa đôi khi gộp hai viên chạm đầu nhau.
